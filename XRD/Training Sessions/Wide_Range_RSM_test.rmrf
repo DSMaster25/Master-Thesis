@@ -1,0 +1,44 @@
+﻿<CustomSequence DisplayName="Sequence" sap:VirtualizedContainerService.HintSize="318,242" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces" xmlns="clr-namespace:Rigaku.ICActivities.Common.BaseActivities;assembly=Rigaku.ICActivities.Common.v1.0" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.rigaku.com/slsii/plugins/icplugin/icpartsactivities/smartlab" xmlns:p1="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:p2="http://schemas.rigaku.com/slsii/plugins/icplugin/icactivities.common" xmlns:ricb="clr-namespace:Rigaku.ICActivities.Common.BaseDesigner;assembly=Rigaku.ICActivities.Common.v1.0" xmlns:rics="clr-namespace:Rigaku.ICActivities.Common.SampleCamera;assembly=Rigaku.ICActivities.Common.v1.0" xmlns:rir="clr-namespace:Rigaku.Infrastructure.RasxLib;assembly=Rigaku.Infrastructure.RasxLib.v1.0" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <p:OpticsAlignment2DXRDActivity DisplayName="Optics Alignment (2D-XRD)" ErrorState="False" FilenameErrorState="False" sap:VirtualizedContainerService.HintSize="310,29" IrradiationWidth="1.0" ParamGUID="3698f9d3-b233-424e-b51a-c86a8224504b" Skip="False" TempUseReceivingVacuumPath="False" gbAlignVerticalTransmission="False" gbCustomizeConditions="True" gbPrint="False" gbRegistrationDestinationUserSettings="True" gbUseDiffractedBeamMonochromator="False" gbUseMirror="False" gdIncidentAngle="90" gsAlignmentConditions="Full" gsAttachmentHead="RxRy" gsAttachmentStage="Z_ChiPhi" gsCameraLength="200" gsDetector="HyPix3000(H)" gsIncidentOptics="CBO-f" gsLengthLimitingSlit="0.5mm" gsPurpose="2D-XRD" gsReceivingOptics1="No_unit" gsSelectionSlit="PB" gsSystemSettings="PB-CBO-f">
+    <p:OpticsAlignment2DXRDActivity.gsIncidentSollerSlit>
+      <p1:InArgument x:TypeArguments="x:String">
+        <p1:Literal x:TypeArguments="x:String" Value="" />
+      </p1:InArgument>
+    </p:OpticsAlignment2DXRDActivity.gsIncidentSollerSlit>
+    <p:OpticsAlignment2DXRDActivity.gsMonochromator>
+      <p1:InArgument x:TypeArguments="x:String">
+        <p1:Literal x:TypeArguments="x:String" Value="" />
+      </p1:InArgument>
+    </p:OpticsAlignment2DXRDActivity.gsMonochromator>
+    <p:OpticsAlignment2DXRDActivity.gsRegistrationDate>
+      <p1:InArgument x:TypeArguments="x:String">
+        <p1:Literal x:TypeArguments="x:String" Value="" />
+      </p1:InArgument>
+    </p:OpticsAlignment2DXRDActivity.gsRegistrationDate>
+    <p:OpticsAlignment2DXRDActivity.gsRegistrationDestinationUserSettings>
+      <p1:InArgument x:TypeArguments="x:String">
+        <p1:Literal x:TypeArguments="x:String" Value="" />
+      </p1:InArgument>
+    </p:OpticsAlignment2DXRDActivity.gsRegistrationDestinationUserSettings>
+  </p:OpticsAlignment2DXRDActivity>
+  <p:SampleAlignmentThinFilmActivity gdReceivingSlit2="{x:Null}" AttachmentAndSamplePlate="RxRy_Wafer" DisplayName="Sample Alignment (Thin Film)" ErrorState="False" FilenameErrorState="False" sap:VirtualizedContainerService.HintSize="310,29" ParamGUID="a3d6ebe5-3606-42c0-848b-07fcf67ffe61" Skip="False" gbCustomizeConditions="True" gbDirectBeamAlignment="True" gbManualExchangeSlitConditions="True" gbMoveToHomePosition="True" gbPutSample="True" gbRenewOmegaOffset="True" gbScanExecChi2="False" gbScanExecOmega2="True" gbScanExecZ2="False" gbSurfaceNormalAlignment="False" gbUseCurrentOmegaOffset="False" gdIncidentSlit="0.05" gdReceivingSlit1="0.05" gdSampleDepth="10" gdSampleThickness="0.5" gdSampleWidth="10" gdScan2thetaAngle2="0.5" gdScanDeltaChi2="3" gdScanDeltaOmega1="1" gdScanDeltaOmega2="0.15" gdScanDeltaZ1="0.5" gdScanDeltaZ2="0.3" gdScanIntensityThreshold1="5000" gdScanIntensityThreshold2="3000" gdScanSpeedChi2="8" gdScanSpeedOmega1="11" gdScanSpeedOmega2="1" gdScanSpeedZ1="10" gdScanSpeedZ2="2" gdScanStartChi2="-3" gdScanStartOmega1="-3.1" gdScanStartOmega2="-0.2" gdScanStartZ1="-2" gdScanStartZ2="-0.3" gdScanStepChi2="0.05" gdScanStepOmega1="0.014" gdScanStepOmega2="0.002" gdScanStepZ1="0.01" gdScanStepZ2="0.01" gdScanStopChi2="3" gdScanStopOmega1="3.1" gdScanStopOmega2="0.2" gdScanStopZ1="0" gdScanStopZ2="0.3" gdZPositionAttachment="0" giScanRepeat1="-1" giScanRepeat2="-1" gsAlignmentCriteria="Standard" gsAttachment="RxRy" gsLengthLimitingSlit="0.5mm" gsReceivingSlit2="19.900" gsSample="WaferSample" gsSamplePlate="ForWafer" gsScanAttenuator1="Appropriate" gsScanAttenuator2="Appropriate" gsScanAxisName2="Chi" gsSearchPeakChi2="SequentialCenterOfGravitySearch" gsSearchPeakOmega1="SequentialCenterOfGravitySearch" gsSearchPeakOmega2="SequentialCenterOfGravitySearch" gsSurfaceDensity="Medium">
+    <p:SampleAlignmentThinFilmActivity.gsSampleSpacer>
+      <p1:InArgument x:TypeArguments="x:String">
+        <p1:Literal x:TypeArguments="x:String" Value="" />
+      </p1:InArgument>
+    </p:SampleAlignmentThinFilmActivity.gsSampleSpacer>
+  </p:SampleAlignmentThinFilmActivity>
+  <p:RSM2DMeasurementActivity DisplayName="RSM Measurement (2D)" ErrorState="False" FilenameErrorState="False" sap:VirtualizedContainerService.HintSize="310,29" ParamGUID="c5b4bacf-e66a-48bf-b9f8-5240842693f8" Skip="False" gbCustomizeConditions="True" gbMoveOrigin="False" gbOrigin2Theta="True" gbOriginChi="True" gbOriginOmega="True" gbOriginPhi="True" gbSaveImageFile="False" gbSaveMeasurementData="True" gbSlitConditions="False" gdIncidentSlit="1" gdOrigin2Theta="69.128" gdOriginChi="0" gdOriginOmega="34.564" gdOriginPhi="0" gdScanSpeed2="10" gdScanStart1="-5" gdScanStart2="20" gdScanStep2="0.02" gdScanStop1="60" gdScanStop2="70" giMeasurementMode="6" gsCameraLength="200" gsDetectorMode="TDI_2D" gsFileName="C:\Users\User1\Documents\Users\s232800\Wide_Range_RSM_BTO.rasx" gsIncidentSollerSlit="Soller_slit_2.5deg" gsLengthLimitingSlit="0.5mm" gsReceivingOptics="No_unit" gsScanMode2="TDI_2D" gsScanRange1="Absolute" gsScanRange2="Absolute">
+    <p:RSM2DMeasurementActivity.gsMemo>
+      <p1:InArgument x:TypeArguments="x:String">
+        <p1:Literal x:TypeArguments="x:String" Value="" />
+      </p1:InArgument>
+    </p:RSM2DMeasurementActivity.gsMemo>
+    <p:RSM2DMeasurementActivity.gsSampleName>
+      <p1:InArgument x:TypeArguments="x:String">
+        <p1:Literal x:TypeArguments="x:String" Value="" />
+      </p1:InArgument>
+    </p:RSM2DMeasurementActivity.gsSampleName>
+  </p:RSM2DMeasurementActivity>
+  <p2:ShutdownActivity AxisPosition="MoveToHomePosition" DisplayName="Shutdown" ErrorState="False" FilenameErrorState="False" sap:VirtualizedContainerService.HintSize="310,29" ParamGUID="a1331f2a-0db6-41e8-a2cb-da58da05d2b5" Skip="False" XGSettings="DoNotChange" />
+</CustomSequence>

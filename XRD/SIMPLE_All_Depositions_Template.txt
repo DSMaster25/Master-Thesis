@@ -1,0 +1,236 @@
+================================================================================
+JUPYTER NOTEBOOK STRUCTURE FOR ALL DEPOSITIONS
+================================================================================
+
+Copy each cell below into your Jupyter notebook in order.
+
+================================================================================
+CELL 1: Setup and Configuration
+================================================================================
+
+import pandas as pd
+import numpy as np
+import os, glob, re, csv
+import matplotlib.pyplot as plt
+from scipy.signal import find_peaks, peak_widths, savgol_filter
+from scipy.optimize import curve_fit
+from matplotlib.tri import Triangulation
+from matplotlib.colors import LinearSegmentedColormap, PowerNorm, Normalize
+from pathlib import Path
+from scipy.interpolate import griddata
+
+# Define all deposition folders to process
+BASE_DIR = r"C:\Dilan\Study\Master Thesis\Characterization\XRD"
+
+DEPOSITIONS = [
+    "30-09-2025 Dep 1",
+    "22-09-2025 Dep 2",
+    "24-09-2025 Dep 3",
+    "07-10-2025 Dep 6",
+    "08-10-2025 Dep 7",
+    "09-10-2025 Dep 8"
+]
+
+# Target and wafer positions
+target_x = 399.88
+target_y = 224.1
+target_z = 332.15
+
+wafer_center_x = 242.5
+wafer_center_y = 257.0
+wafer_center_z = 435.0
+
+# XRD analysis parameters
+REGIONS = [
+    (20.5, 23.0),   # (100)
+    (30.5, 33.0),   # (110)
+    (37.5, 40.0),   # (111)
+    (44.0, 47.0),   # (200)
+    (50.0, 52.5),   # (210)
+    (55.0, 57.5),   # (112)
+]
+REGION_NAMES = ["(100)", "(110)", "(111)", "(200)", "(210)", "(112)"]
+
+window_pts = 12
+polyorder = 2
+min_sep_deg = 0.25
+width_deg = (0.06, 1.2)
+ratio_min = 1.2
+frac_min = 0.00
+
+print(f"Configuration loaded!")
+print(f"Will process {len(DEPOSITIONS)} depositions")
+
+================================================================================
+CELL 2: Helper Functions (copy from your Dep 1 notebook)
+================================================================================
+
+def _safe_window(n, w, p):
+    if n < 5:
+        return None, None
+    w = min(w, n - (1 - (n % 2)))
+    if w % 2 == 0: w += 1
+    w = max(5, w)
+    p = min(p, w - 2)
+    return w, p
+
+def extract_xy_from_filename(filename):
+    """Extract X and Y coordinates from filename"""
+    name = os.path.basename(filename).rsplit('.', 1)[0]
+    parts = name.split('_')
+    try:
+        x_str, y_str = parts[-2], parts[-1]
+        def tok_to_float(t):
+            if '-' in t[1:]:
+                t = ('-' + t[1:].replace('-', '.', 1)) if t.startswith('-') else t.replace('-', '.', 1)
+            return float(t)
+        x_val, y_val = tok_to_float(x_str), tok_to_float(y_str)
+        return x_val, y_val
+    except Exception:
+        return None, None
+
+print("Helper functions loaded!")
+
+================================================================================
+CELL 3: Process All Depositions (THE MAIN LOOP)
+================================================================================
+
+# THIS IS THE KEY LOOP STRUCTURE
+all_deposition_results = {}
+
+for dep_name in DEPOSITIONS:
+    print(f"\n{'='*80}")
+    print(f"Processing: {dep_name}")
+    print(f"{'='*80}")
+
+    # Build path to XY Data folder
+    dep_folder = os.path.join(BASE_DIR, dep_name)
+    xy_data_folder = os.path.join(dep_folder, "XY Data")
+
+    # Check if folder exists
+    if not os.path.exists(xy_data_folder):
+        print(f"  WARNING: XY Data folder not found")
+        continue
+
+    # Change to that folder and get files
+    os.chdir(xy_data_folder)
+    files = sorted(glob.glob("*.xy"))
+
+    if len(files) == 0:
+        print(f"  WARNING: No .xy files found")
+        continue
+
+    print(f"  Found {len(files)} files")
+
+    # Initialize storage for THIS deposition
+    all_file_results = []
+    x_coordinates = []
+    y_coordinates = []
+
+    # Process each file in THIS deposition
+    for fp in files:
+        data = np.loadtxt(fp)
+        x, y = data[:,0], data[:,1]
+        step = float(np.mean(np.diff(x)))
+
+        # Smooth
+        w_use, p_use = _safe_window(len(x), window_pts, polyorder)
+        ys = savgol_filter(y, w_use, p_use, mode="interp") if w_use is not None else y.copy()
+
+        # ... YOUR PEAK DETECTION CODE HERE (copy from Dep 1 notebook) ...
+        # For brevity, I'm skipping the full peak detection code
+        # Just showing the structure
+
+        # Extract coordinates
+        x_val, y_val = extract_xy_from_filename(fp)
+        if x_val is not None and y_val is not None:
+            x_coordinates.append(x_val)
+            y_coordinates.append(y_val)
+
+    # Store results for THIS deposition
+    all_deposition_results[dep_name] = {
+        'x_coordinates': np.array(x_coordinates),
+        'y_coordinates': np.array(y_coordinates),
+        'num_files': len(files)
+    }
+
+    print(f"  Completed!")
+
+print(f"\n{'='*80}")
+print(f"All {len(all_deposition_results)} depositions processed!")
+print(f"{'='*80}")
+
+================================================================================
+CELL 4: Create Plots for Each Deposition (ANOTHER LOOP)
+================================================================================
+
+# Loop through each deposition and create plots
+for dep_name in DEPOSITIONS:
+
+    # Skip if we don't have results for this deposition
+    if dep_name not in all_deposition_results:
+        continue
+
+    print(f"\nCreating plots for {dep_name}")
+
+    # Get the data for THIS deposition
+    dep_data = all_deposition_results[dep_name]
+    x_coords = dep_data['x_coordinates']
+    y_coords = dep_data['y_coordinates']
+
+    # Convert to real-world coordinates
+    x_pos_real = -x_coords + wafer_center_x
+    y_pos_real = y_coords + wafer_center_y
+    z_pos_real = np.full_like(x_pos_real, wafer_center_z)
+
+    # Calculate 3D distance
+    distances_3d = np.sqrt(
+        (x_pos_real - target_x)**2 +
+        (y_pos_real - target_y)**2 +
+        (z_pos_real - target_z)**2
+    )
+
+    print(f"  Distance range: {distances_3d.min():.2f} - {distances_3d.max():.2f} mm")
+
+    # CREATE YOUR PLOTS HERE
+    # Example:
+    # fig, ax = plt.subplots(figsize=(10, 6))
+    # ax.scatter(distances_3d, your_data)
+    # ax.set_title(f"{dep_name}: Your Title")
+    # plt.show()
+
+print("\nAll plots created!")
+
+================================================================================
+KEY POINTS:
+================================================================================
+
+1. The loop structure is:
+
+   for dep_name in DEPOSITIONS:
+       # Get the folder for this deposition
+       xy_data_folder = os.path.join(BASE_DIR, dep_name, "XY Data")
+
+       # Process files in this folder
+       os.chdir(xy_data_folder)
+       files = glob.glob("*.xy")
+
+       for file in files:
+           # Process each file
+           pass
+
+       # Store results
+       all_deposition_results[dep_name] = {...}
+
+2. You can have MULTIPLE loops:
+   - First loop: Process all depositions and store results
+   - Second loop: Create plots from the stored results
+
+3. Use the deposition name in plot titles:
+   plt.title(f"{dep_name}: My Plot Title")
+
+4. Check if deposition exists in results before plotting:
+   if dep_name in all_deposition_results:
+       # Create plot
+
+================================================================================
