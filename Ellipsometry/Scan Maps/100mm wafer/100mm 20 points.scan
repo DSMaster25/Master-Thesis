@@ -1,0 +1,112 @@
+﻿
+start_Substrate Dimensions
+	0	10.0	F	10.0	10.0	
+	start_LaserBar_Shape
+		0	F	
+		0	F	
+		0.0	F	
+		0	F	
+		
+	end_LaserBar_Shape
+	
+	start_Custom2Trans
+		
+	end_Custom2Trans
+	
+end_Substrate Dimensions
+
+start_Alignment
+	0	0.0	0.0	
+end_Alignment
+
+start_Offsets
+	0.0	0.0	0.0	F	
+end_Offsets
+
+start_Sample Load
+	0.0	
+end_Sample Load
+
+start_Rendering Mode
+	0.0	0.0	
+end_Rendering Mode
+
+start_Scan Points
+	20	
+	0.0	0.0	0.0	
+	1.7320508	-1.0	0.0	
+	-3.6739403E-16	-2.0	0.0	
+	-1.7320508	-1.0	0.0	
+	-1.7320508	1.0	0.0	
+	1.2246469E-16	2.0	0.0	
+	1.7320508	1.0	0.0	
+	4.0	0.0	0.0	
+	3.541824	1.8588927	0.0	
+	2.272259	3.2919354	0.0	
+	0.4821467	3.9708354	0.0	
+	-1.4184196	3.7400649	0.0	
+	-2.994043	2.6524906	0.0	
+	-3.8837674	0.95726264	0.0	
+	-3.8837674	-0.95726264	0.0	
+	-2.994043	-2.6524906	0.0	
+	-1.4184196	-3.7400649	0.0	
+	0.4821467	-3.9708354	0.0	
+	2.272259	-3.2919354	0.0	
+	3.541824	-1.8588927	0.0	
+end_Scan Points
+
+start_Deskew
+	0.0	0.0	0.0	0.0	F	
+	F	0	0	
+	F	10.0	
+	
+end_Deskew
+
+start_Transmission Baseline
+	F	0.0	0.0	
+end_Transmission Baseline
+
+start_Pattern Rec
+	F	0	-1	
+	
+	start_Target1
+		0	
+		-99999	-99999	
+		0	0	
+		
+	end_Target1
+	
+	start_Target2
+		0	
+		-99999	-99999	
+		0	0	
+		
+	end_Target2
+	
+	start_Match Parms
+		128	
+		F	
+	end_Match Parms
+	
+end_Pattern Rec
+
+start_Pad Alignment
+	F	
+	
+end_Pad Alignment
+
+start_Pad Pattern Rec
+	F	0	-1	1	
+	0	
+	0	
+	
+	start_Match Parms
+		128	F	
+	end_Match Parms
+	
+end_Pad Pattern Rec
+
+start_Trans Coords Options
+	F	
+	
+end_Trans Coords Options

@@ -1,0 +1,34 @@
+﻿
+start_Parm Set Information
+	''	''	
+end_Parm Set Information
+
+start_Data Parameters
+	'Standard'	
+	1.0	
+end_Data Parameters
+
+start_Data Parm Map
+	0	
+	
+end_Data Parm Map
+
+start_System Parameters
+	T	3	70.0	70.0	5.0	
+	T	3	0.0	0.0	5.0	
+	F	
+	
+end_System Parameters
+
+start_System Parm Map
+	8	
+	'Tilt Align Mode'	'INTEGER'	2	
+	'Disable Translator Reposition'	'BOOLEAN'	F	
+	'Sample Position'	'STRING'	'Primary'	
+	'Align At First Angle'	'BOOLEAN'	T	
+	'Disable Sample Load'	'BOOLEAN'	F	
+	'Alignment Angle'	'FLOAT'	70.0	
+	'Z-Stage Align Mode'	'INTEGER'	5	
+	'Sample Height'	'DOUBLE'	'0.575'	
+	
+end_System Parm Map
